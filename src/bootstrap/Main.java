@@ -1,25 +1,20 @@
-package bootstrap;
+package src.bootstrap;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import priority.A;
-import priority.B;
-import priority.C;
-import priority.D;
-import priority.E;
-import priority.Letter;
+import src.priority.A;
+import src.priority.B;
+import src.priority.C;
+import src.priority.D;
+import src.priority.E;
+import src.priority.Letter;
 
 public class Main {
 	
 	private long number ;
 	private Letter a = new A(5);
-	private Letter b = new B(1);
+	private Letter b = new B(1); 
 	private Letter c = new C(1);
-	private Letter d = new D(1);
-	private Letter e = new E(2);
+	private Letter d = new D(3);
+	private Letter e = new E(0);
 	private Letter[] letters = {a,b,c,d,e};
 //	private Letter[] letters = {a,b,c};
 	public static void main(String[] args) {
@@ -79,6 +74,9 @@ public class Main {
 			@Override
 			public int compare(Letter f, Letter s) {
 				int i = 0 ;
+				if (f.getPriority() == 0 || s.getPriority() == 0) {  //将优先级为0的放到最后面
+					return 1;
+				} 
 				int fbs = f.getNumber()/f.getPriority();
 				int sbs = s.getNumber()/s.getPriority();
 				if (fbs > sbs) {					 //总数占比高的向后排
@@ -96,7 +94,6 @@ public class Main {
 				}
 				return i;
 			}
-			
 		});
 		return ls.get(0);
 	}
